@@ -1,6 +1,6 @@
 ## NPM ##
 node_modules
-giot dist/bundle.js
+dist/bundle.js
 
 ## API KEYS ##
 src/config/unsplash.js
