@@ -1,9 +1,11 @@
 const mysql = require('mysql');
+const key = require('../src/config/unsplash.js');
+
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'airbnb',
+  host: key.MYSQL_HOST,
+  user: key.MYSQL_USER,
+  password: key.MYSQL_PASSWORD,
+  database: key.MYSQL_DATABASE
 });
 
 connection.connect();
@@ -19,7 +21,7 @@ const insertIntoDB = (id, likes, username, link, tag, photoSet) => {
   });
 };
 
-const retrieve = (callback) => {
+const retrieve = callback => {
   const sql = `SELECT *
                FROM photos`;
 
@@ -36,5 +38,5 @@ const retrieve = (callback) => {
 
 module.exports = {
   insertIntoDB,
-  retrieve,
+  retrieve
 };
