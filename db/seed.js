@@ -11,7 +11,7 @@ const collections = {
   backyard: '4944404',
   pets: '4944391',
   interior: '4944387',
-  other: '4944365',
+  other: '4944365'
 };
 
 const seed = () => {
@@ -23,13 +23,12 @@ const seed = () => {
       {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
-        },
-      },
+          'Content-Type': 'application/json'
+        }
+      }
     )
-      .then((response) => response.json())
-      .then((data) => {
-
+      .then(response => response.json())
+      .then(data => {
         const photoSet = {
           '0': 'zero',
           '1': 'one',
@@ -41,8 +40,8 @@ const seed = () => {
           '7': 'seven',
           '8': 'eight',
           '9': 'nine',
-          '10': 'ten',
-        }
+          '10': 'ten'
+        };
 
         for (let i = 0; i < data.length; i++) {
           dbConnection.insertIntoDB(
@@ -51,11 +50,11 @@ const seed = () => {
             data[i].user.username,
             data[i].urls.regular,
             interior === 'livingRoom' ? 'living room' : interior,
-            photoSet[i],
+            photoSet[i]
           );
         }
       });
-    console.log(`[Seeded]: ${interior}`)
+    console.log(`[Seeded]: ${interior}`);
   }
   return 'Seeding Completed';
 };
