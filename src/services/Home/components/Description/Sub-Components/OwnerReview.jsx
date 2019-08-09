@@ -16,7 +16,7 @@ const OwnerReview = () => {
     <div className="right-description-box">
       <div className="review-photo-description-box">
         <img
-          src="http://pbs.twimg.com/profile_images/1002272769352978433/9S4QWSR0_400x400.jpg"
+          src="https://dailycollegian.com/wp-content/uploads/2019/03/18699749_629272817281486_5536939696699797933_o-900x900.jpg"
           alt="review-picture"
           className="review-picture"
         />
