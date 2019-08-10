@@ -5,7 +5,7 @@
 - [ ] grab a copy with `git clone`
 - [ ] configure keys in `src/config/unsplash.js`
 - [ ] run `npm install`
-- [ ] run `npm run db- [ ]dev` and sign into MySQL database
+- [ ] run `npm run db-dev` and sign into MySQL database
 - [ ] run `npm run dev` to build, serve, and render service
 - [ ] click [this](http://localhost:3000/) to open in browser
 
