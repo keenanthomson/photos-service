@@ -8,12 +8,23 @@ app.use(express.static(__dirname + './../dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/retrieve', (req, res) => {
+app.post('/retrieve', (req, res) => {
+  res.send('POST request to homepage');
+});
 
-  dbConnection.retrieve((data) => {
+app.get('/retrieve/:id', (req, res) => {
+  dbConnection.retrieve(data => {
     res.send(data);
-  })
-})
+  });
+});
+
+app.put('/retrieve', (req, res) => {
+  res.send('PUT request to homepage');
+});
+
+app.delete('/retrieve', (req, res) => {
+  res.send('DELETE request to homepage');
+});
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
