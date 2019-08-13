@@ -15,3 +15,10 @@
 
 - supports at least 100 requests per second on EC2 using a t2.micro instance
 - uses performance improvements to support a test load up to 10K requests per second
+
+## API routes
+
+- `post` that creates a new record using `/retrieve/:id`
+- `get` that reads all records using `/retrieve`
+- `put` that updates an existing record using `/retrieve/:id`
+- `delete` that deletes an existing record using `/retrieve/:id`
