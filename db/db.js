@@ -10,33 +10,71 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
-const insertIntoDB = (id, likes, username, link, tag, photoSet) => {
-  const sql = `INSERT INTO photos (id, likes, username, link, tag, photo_set)
-               VALUES ('${id}', '${likes}', '${username}', '${link}', '${tag}', '${photoSet}')`;
+const create = (
+  callback,
+  id,
+  photos_id,
+  likes,
+  username,
+  link,
+  tag,
+  photo_set
+) => {
+  const query = `INSERT INTO photos (id, photos_id, likes, username, link, tag, photo_set) VALUES ('${id}', '${photos_id}', '${likes}', '${username}', '${link}', '${tag}', '${photo_set}')`;
 
-  connection.query(sql, (err, row) => {
+  connection.query(query, (err, data) => {
     if (err) {
-      console.log(err);
+      console.log('CREATE request err', err);
+    } else {
+      console.log('CREATE request success');
+      callback(data);
     }
   });
 };
 
-const retrieve = callback => {
-  const sql = `SELECT *
+const read = callback => {
+  const query = `SELECT *
                FROM photos`;
 
-  connection.query(sql, (err, row) => {
+  connection.query(query, (err, data) => {
     if (err) {
-      console.log(err);
+      console.log('READ request err', err);
     } else {
-      callback(row);
+      console.log('READ request success');
+      callback(data);
     }
   });
 };
 
-// connection.end();
+const update = (callback, id, photos_id, likes, username) => {
+  const query = `UPDATE photos SET id = '${id}', likes = '${likes}', username = '${username}' WHERE photos_id = '${photos_id}'`;
+
+  connection.query(query, (err, data) => {
+    if (err) {
+      console.log('UPDATE request err', err);
+    } else {
+      console.log('UPDATE request success');
+      callback(data);
+    }
+  });
+};
+
+const remove = (callback, photos_id) => {
+  const query = `DELETE FROM photos WHERE photos_id = '${photos_id}'`;
+
+  connection.query(query, (err, data) => {
+    if (err) {
+      console.log('DELETE request err', err);
+    } else {
+      console.log('DELETE request success');
+      callback(data);
+    }
+  });
+};
 
 module.exports = {
-  insertIntoDB,
-  retrieve
+  create,
+  read,
+  update,
+  remove
 };

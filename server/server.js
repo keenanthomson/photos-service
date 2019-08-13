@@ -1,30 +1,66 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const dbConnection = require('./../db/db.js');
+const db = require('./../db/db.js');
+
 const app = express();
-const port = process.env.port || 3000;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(__dirname + './../dist'));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
-app.post('/retrieve', (req, res) => {
-  res.send('POST request to homepage');
+app.post('/retrieve/:id', (req, res) => {
+  const photos_id = req.params.id;
+  const { id, likes, username, link, tag, photo_set } = req.body;
+
+  db.create(
+    data => {
+      console.log('CREATE response success');
+      res.send(data);
+    },
+    id,
+    photos_id,
+    likes,
+    username,
+    link,
+    tag,
+    photo_set
+  );
 });
 
-app.get('/retrieve/:id', (req, res) => {
-  dbConnection.retrieve(data => {
+app.get('/retrieve', (req, res) => {
+  db.read(data => {
+    console.log('READ response success');
     res.send(data);
   });
 });
 
-app.put('/retrieve', (req, res) => {
-  res.send('PUT request to homepage');
+app.put('/retrieve/:id', (req, res) => {
+  const photos_id = req.params.id;
+  const { id, likes, username } = req.body;
+
+  db.update(
+    data => {
+      console.log('UPDATE response success');
+      res.send(data);
+    },
+    id,
+    photos_id,
+    likes,
+    username
+  );
 });
 
-app.delete('/retrieve', (req, res) => {
-  res.send('DELETE request to homepage');
+app.delete('/retrieve/:id', (req, res) => {
+  const photos_id = req.params.id;
+
+  db.remove(data => {
+    console.log('DELETE response success');
+    res.send(data);
+  }, photos_id);
 });
+
+const port = process.env.port || 3000;
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
